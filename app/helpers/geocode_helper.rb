@@ -5,6 +5,7 @@ module GeocodeHelper
   def geocode(address)
     url = "http://apis.daum.net/local/geo/addr2coord?apikey=#{DAUM_APIKEY}&output=json&q=#{address}"
     items = JSON.parse(open(URI.encode(url)).read)['channel']['item']
+    puts "geocode: #{items['result']}"
     unless items.blank?
       item = items.first
       [item['lng'], item['lat']]
